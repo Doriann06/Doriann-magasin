@@ -5,8 +5,9 @@ class Article {
   String slug;
   int price;
   String description;
-   List<String> tags;
-    Color color;
+  List<String> tags;
+  Color color;
+  String image;
 
   Article({
     required this.id,
@@ -16,6 +17,7 @@ class Article {
     required this.description,
     required this.tags,
     required this.color,
+    required this.image,
   });
   static Article fromJson(Map<String, dynamic> json) {
     final tags =
@@ -29,7 +31,8 @@ class Article {
       tags: tags,
       color: json['color'] != null
           ? Color(int.parse(json['color'], radix: 16))
-          : Colors.blueAccent,    
+          : Colors.blueAccent,
+      image: json['images'][0],  
       );
   }
 }

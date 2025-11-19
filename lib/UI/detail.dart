@@ -18,6 +18,16 @@ class Detail extends StatelessWidget {
               color: article.color,
               elevation: 7,
               margin: const EdgeInsets.all(10),
+              child: Image.network(
+                article.image,
+                width: 200,
+                height: 200,
+                )
+            ),
+            Card(
+              color: article.color,
+              elevation: 7,
+              margin: const EdgeInsets.all(10),
               child: ListTile(
                 leading: (const Icon(Icons.key)),
                 title: const Text('Identifiant'),

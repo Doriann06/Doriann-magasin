@@ -33,7 +33,11 @@ class Ecran1 extends StatelessWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.blueAccent,
-                    child: Text(snapshot.data?[index].id.toString() ?? ""),
+                    child: Image.network(
+                      snapshot.data?[index].image ?? "",
+                      width: 200,
+                      height: 200,
+                    )
                   ),
                   title: Text(snapshot.data?[index].title ?? ""),
                   subtitle: Text(snapshot.data?[index].tags.join(" ") ?? ""),
