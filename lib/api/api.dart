@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'dart:ffi';
 import '../models/article.dart';
 import 'package:http/http.dart' as http;
-
+import '../models/favorites.dart';
 class API {
   
   static Future<List<Article>> getArticles() async {
@@ -14,6 +15,24 @@ class API {
     } else {
       throw Exception("Erreur lors du chargement des données");
     }
+  }
+  static Future<List<Article>> getArticleInFavorites() async {
+    final String apiUrl = "https://api.escuelajs.co/api/v1/products";
+    final response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = json.decode(response.body);
+      final List<dynamic> jsonDataFavorites = [];
+      for  (var item in jsonData) {
+        if (Favorites.staticItems.contains(item['id'])) {
+          jsonDataFavorites.add(item);
+        }
+      }
+      final List<Article> articles = jsonDataFavorites.map((item) => Article.fromJson(item)).toList();
+      return articles;
+    } else {
+      throw Exception("Erreur lors du chargement des données");
+    }
+    
   }
 }
   

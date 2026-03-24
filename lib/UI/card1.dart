@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'detail.dart';
 import '../api/api.dart';
+import '../models/favorites.dart';
 void main() {
   runApp(Ecran1());
 }
 
 class Ecran1 extends StatelessWidget {
  final API api = API();
-
+ 
   Ecran1({super.key});
 
   @override
@@ -26,6 +27,7 @@ class Ecran1 extends StatelessWidget {
           return ListView.builder(
             itemCount: snapshot.data?.length ?? 0,
             itemBuilder: (BuildContext context, index) {
+              int itemNo = snapshot.data?[index].id ?? 0;
               return Card(
                 color: Colors.white,
                 elevation: 7,
@@ -41,7 +43,9 @@ class Ecran1 extends StatelessWidget {
                   ),
                   title: Text(snapshot.data?[index].title ?? ""),
                   subtitle: Text(snapshot.data?[index].tags.join(" ") ?? ""),
-                  trailing: IconButton(
+                  trailing: Wrap(
+                    children: [
+                    IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {
                       Navigator.push(
@@ -53,6 +57,27 @@ class Ecran1 extends StatelessWidget {
                       );
                     },
                   ),
+                  IconButton(
+                    key: Key('icon_$itemNo'),
+                    icon: Favorites.staticItems.contains(itemNo)
+                        ? const Icon(Icons.favorite)
+                        : const Icon(Icons.favorite_border),
+                    onPressed: () {
+                      !Favorites.staticItems.contains(itemNo)
+                          ? Favorites.staticItems.add(itemNo)
+                          : Favorites.staticItems.remove(itemNo);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(Favorites.staticItems.contains(itemNo)
+                              ? 'Added to favorites.'
+                              : 'Removed from favorites.'),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                  )
+                    ],
+                ),
                 ),
               );
             },
