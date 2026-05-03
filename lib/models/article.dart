@@ -1,38 +1,45 @@
-import 'package:flutter/material.dart';
 class Article {
-  int id;
-  String title;
-  String slug;
-  int price;
-  String description;
-  List<String> tags;
-  Color color;
-  String image;
+  final int id;
+  final String title;
+  final String description;
+  final String slug;
+  final String? image;
+  final int? price;
+ 
 
-  Article({
+   Article({
     required this.id,
     required this.title,
-    required this.slug,
-    required this.price,
     required this.description,
-    required this.tags,
-    required this.color,
-    required this.image,
+    required this.slug,
+    this.image,
+    this.price,
+    
   });
-  static Article fromJson(Map<String, dynamic> json) {
-    final tags =
-        (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [];
+  factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
-      id: json['id'],
-      title: json['title'],
-      slug: json['slug'],
-      price: json['price'],
-      description: json['description'],
-      tags: tags,
-      color: json['color'] != null
-          ? Color(int.parse(json['color'], radix: 16))
-          : Colors.blueAccent,
-      image: json['images'][0],  
-      );
+      id: json['id'] as int,
+      title: json['title'] as String? ?? json['title'] as String? ?? 'Sans titre',
+      description: json['description'] !=null
+        ?json['description'] as String  
+        :json['description'] as String? ?? '',
+      slug: json['slug'] !=null
+        ?json['slug'] as String  
+        :json['slug'] as String? ?? 'Inconnu',
+      image: json['images'][0] as String? ?? json['image'] as String?,
+      price: (json['price'] as num?)?.toInt(),
+    );
   }
+  Map<String, dynamic> toJson() =>{
+      'id': id,
+      'title': title,
+      'description': description,
+      'slug': slug,
+      'images': [image],
+      'price': price,
+  };
+  @override
+  bool operator ==(Object other) => other is Article &&other.id == id ;
+  @override
+  int get hashCode => id.hashCode;
 }
