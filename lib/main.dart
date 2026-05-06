@@ -6,7 +6,7 @@ import 'router.dart';
 
 import 'providers/article_provider.dart';
 import 'providers/favoris_provider.dart';
-
+import 'providers/pannier_provider.dart';
 
 void main() {
   // Initialisation SQLite nécessaire sur desktop (macOS, Windows, Linux)
@@ -20,6 +20,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => ArticleProvider()),
         ChangeNotifierProvider(create: (_)=> FavorisProvider()),
+        ChangeNotifierProvider(create: (_)=> PannierProvider()),
       ],
       child: const MyApp(),
     ),

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'UI/card1.dart';
 import 'UI/card2.dart';
+import 'UI/pannier_screen.dart';
 import 'UI/detail.dart';
 final router = GoRouter(
   routes: [
@@ -18,6 +19,10 @@ final router = GoRouter(
         GoRoute(
           path: 'favoris',
           builder: (context, state) => const FavorisScreen(),
+        ),
+        GoRoute(
+          path: 'pannier',
+          builder: (context, state) =>  PannierScreen(),
         ),
       ],
     ),

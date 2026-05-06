@@ -42,3 +42,5 @@ final mockArticlesJson = [
     'price': 10,
   },
 ];
+final testPannier = [testArticle1, testArticle2];
+final testPannier2= [testArticle1,testArticle1];

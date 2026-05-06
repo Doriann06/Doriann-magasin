@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:article_liste/providers/favoris_provider.dart';
+import 'package:article_liste/providers/pannier_provider.dart';
 import '../providers/article_provider.dart';
 import '../models/article.dart';
 
@@ -46,7 +47,16 @@ class ArticleDetailScreen extends StatelessWidget {
                       label: Text(estFavori ? 'Retirer des favoris' : 'Ajouter aux favoris'),
                     );
                   }
-                ), 
+                ),
+                Consumer<PannierProvider>(
+                  builder: (context, pannierProvider, _) {
+                    return ElevatedButton.icon(
+                      onPressed: () => pannierProvider.addToPannier(article),
+                      icon: const Icon(Icons.shopping_cart),
+                      label: const Text('Ajouter au pannier'),
+                    );
+                  }
+                )
               ],
             ),
           );
