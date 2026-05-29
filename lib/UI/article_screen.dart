@@ -34,6 +34,10 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
             icon: const Icon(Icons.shopping_cart),
             onPressed: () => context.go('/pannier'),
           ),
+          IconButton(
+              icon: const Icon(Icons.history),
+              onPressed: () => context.go('/historique-pannier'),
+            ),
         ],  
       ),
       body: Consumer<ArticleProvider>(

@@ -1,8 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'UI/card1.dart';
-import 'UI/card2.dart';
+import 'UI/article_screen.dart';
+import 'UI/favoris_screen.dart';
 import 'UI/pannier_screen.dart';
 import 'UI/detail.dart';
+import 'UI/historique_pannier_screen.dart';
+import 'UI/detail_historique_pannier.dart';
 final router = GoRouter(
   routes: [
     GoRoute(
@@ -23,6 +25,17 @@ final router = GoRouter(
         GoRoute(
           path: 'pannier',
           builder: (context, state) =>  PannierScreen(),
+        ),
+        GoRoute(
+          path: 'historique-pannier',
+          builder: (context, state) => const HistoriquePannierScreen(),
+        ),
+        GoRoute(
+          path: 'historique-pannier/:id',
+          builder: (context, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return DetailHistoriquePannier(pannierId: id);
+          },
         ),
       ],
     ),

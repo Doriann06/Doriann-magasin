@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/pannier_provider.dart';
+import '../providers/historique_pannier_provider.dart';
+import '../models/pannier.dart';
 class PannierScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,16 @@ class PannierScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Pannier pannier = Pannier(id: DateTime.now().millisecondsSinceEpoch, articles: provider.pannier, total: provider.total);
+                  context.read<HistoriquePannierProvider>().ajouterAPannier(pannier);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Pannier enregistré dans l\'historique')),
+                  );
+                  },
+                  child: const Text('Valider le pannier')
+                ),
             ],
           );
         },

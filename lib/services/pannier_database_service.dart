@@ -32,6 +32,12 @@ class PannierDatabaseService {
     final rows = await db.query('pannier');
     return rows.map((row) => Pannier.fromJson(jsonDecode(row['data'] as String))).toList();
   }
+  Future<Pannier?> getPannierById(int id) async {
+    final db = await _database;
+    final rows = await db.query('pannier', where: 'id = ?', whereArgs: [id]);
+    if (rows.isEmpty) return null;
+    return Pannier.fromJson(jsonDecode(rows.first['data'] as String));
+  }
   Future<void> savePannier(List<Pannier> items) async {
     final db = await _database;
     await db.transaction((txn) async {
