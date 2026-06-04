@@ -41,6 +41,12 @@ class Article {
       'price': price,
       'category': category,
   };
+  sortByPriceDownward(List<Article> articles) {
+    articles.sort((a, b) => b.price!.compareTo(a.price!));
+  }
+  sortByPriceUpward(List<Article> articles) {
+    articles.sort((a, b) => a.price!.compareTo(b.price!));
+  }
   @override
   bool operator ==(Object other) => other is Article &&other.id == id ;
   @override

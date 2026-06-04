@@ -5,6 +5,8 @@ import 'UI/pannier_screen.dart';
 import 'UI/detail.dart';
 import 'UI/historique_pannier_screen.dart';
 import 'UI/detail_historique_pannier.dart';
+import 'UI/article_downard_screen.dart';
+import 'UI/article_upward_screen.dart';
 final router = GoRouter(
   routes: [
     GoRoute(
@@ -36,6 +38,14 @@ final router = GoRouter(
             final id = int.parse(state.pathParameters['id']!);
             return DetailHistoriquePannier(pannierId: id);
           },
+        ),
+        GoRoute(
+          path: 'article-downward',
+          builder: (context, state) => const ArticleListDownwardScreen(),
+        ),
+        GoRoute(
+          path: 'article-upward',
+          builder: (context, state) => const ArticleListUpwardScreen(),
         ),
       ],
     ),

@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/article_provider.dart';
 
-class ArticleListScreen extends StatefulWidget {
-  const ArticleListScreen({super.key});
+class ArticleListUpwardScreen extends StatefulWidget {
+  const ArticleListUpwardScreen({super.key});
 
   @override
-  State<ArticleListScreen> createState() => _ArticleListScreenState();
+  State<ArticleListUpwardScreen> createState() => _ArticleListUpwardScreenState();
 }
 
-class _ArticleListScreenState extends State<ArticleListScreen> {
+class _ArticleListUpwardScreenState extends State<ArticleListUpwardScreen> {
   @override
   void initState() {
     super.initState();
@@ -24,7 +24,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ArticleListe'),
+        title: const Text('ArticleListeCroissant'),
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite),
@@ -38,13 +38,9 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
               icon: const Icon(Icons.history),
               onPressed: () => context.go('/historique-pannier'),
             ),
-          IconButton(
+            IconButton(
               icon: const Icon(Icons.arrow_downward),
               onPressed: () => context.go('/article-downward'),
-            ),
-          IconButton(
-              icon: const Icon(Icons.arrow_upward),
-              onPressed: () => context.go('/article-upward'),
             ),
         ],  
       ),
@@ -60,6 +56,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
             itemCount: provider.articles.length,
             itemBuilder: (context, index) {
               final article = provider.articles[index];
+              article.sortByPriceUpward(provider.articles); // Tri par ordre croissant du prix
               return ListTile(
                 leading: article.image != null
                     ? Image.network(article.image!, width: 50, fit: BoxFit.cover)
