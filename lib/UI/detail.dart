@@ -38,6 +38,9 @@ class ArticleDetailScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(article.description),
                 const SizedBox(height: 16),
+                if(article.category!.isNotEmpty)
+                  Chip(label: Text(article.category!['name'] ?? 'Inconnu')),
+                const SizedBox(height: 16),
                 Consumer<FavorisProvider>(
                   builder: (context, favorisProvider, _) {
                     final estFavori = favorisProvider.estFavori(article.id);

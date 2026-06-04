@@ -13,6 +13,14 @@ void main() {
       'description': 'Elevate your casual wear with our Classic Grey Hooded Sweatshirt. Made from a soft cotton blend, this hoodie features a front kangaroo pocket, an adjustable drawstring hood, and ribbed cuffs for a snug fit. Perfect for those chilly evenings or lazy weekends, it pairs effortlessly with your favorite jeans or joggers.',
       'images': ['https://example.com/bb.jpg'],
       'price': 79,
+      "category": {
+      "id": 1,
+      "name": "Clothes",
+      "slug": "clothes",
+      "image": "https://i.imgur.com/QkIa5tT.jpeg",
+      "creationAt": "2026-06-03T19:18:31.000Z",
+      "updatedAt": "2026-06-03T19:18:31.000Z"
+    },
     };
 
     test('fromJson crée une Article correctement', () {
@@ -24,6 +32,7 @@ void main() {
       expect(article.description, 'Elevate your casual wear with our Classic Grey Hooded Sweatshirt. Made from a soft cotton blend, this hoodie features a front kangaroo pocket, an adjustable drawstring hood, and ribbed cuffs for a snug fit. Perfect for those chilly evenings or lazy weekends, it pairs effortlessly with your favorite jeans or joggers.');// TODO : vérifier que les champs de la série sont correctement initialisés à partir du JSON
       expect(article.price, 79);// TODO : vérifier que la note est correctement extraite du champ "rating"
       expect(article.image, 'https://example.com/bb.jpg');// TODO : vérifier que les champs de la série sont correctement initialisés à partir du JSON
+      expect(article.category!['name'], 'Clothes');// TODO : vérifier que la catégorie est correctement extraite du champ "category"
     });
 
 

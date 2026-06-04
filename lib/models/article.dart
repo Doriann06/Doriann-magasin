@@ -5,6 +5,7 @@ class Article {
   final String slug;
   final String? image;
   final int? price;
+  final Map<String, dynamic>? category;
  
 
    Article({
@@ -14,7 +15,7 @@ class Article {
     required this.slug,
     this.image,
     this.price,
-    
+    this.category,
   });
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
@@ -28,6 +29,7 @@ class Article {
         :json['slug'] as String? ?? 'Inconnu',
       image: json['images'][0] as String? ?? json['image'] as String?,
       price: (json['price'] as num?)?.toInt(),
+      category: json['category'] as Map<String, dynamic>? ?? {},
     );
   }
   Map<String, dynamic> toJson() =>{
@@ -37,6 +39,7 @@ class Article {
       'slug': slug,
       'images': [image],
       'price': price,
+      'category': category,
   };
   @override
   bool operator ==(Object other) => other is Article &&other.id == id ;
